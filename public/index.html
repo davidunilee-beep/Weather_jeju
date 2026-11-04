@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f6f0">
+  <meta name="description" content="지금 제주의 기온, 습도, 날씨를 한눈에 확인하세요.">
+  <title>지금 제주 날씨는?</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <header><a class="brand" href="./"><span class="brand-icon" aria-hidden="true">귤</span> JEJU, NOW<span class="brand-dot">.</span></a><span class="header-note">제주의 오늘을 만나다</span></header>
+    <main>
+      <div class="intro"><p class="eyebrow">A LITTLE WEATHER, A LITTLE JEJU</p><h1>지금 제주 날씨는<span>?</span></h1><p>떠나기 전에도, 머무는 동안에도.<br class="mobile-break"> 지금 제주의 하늘을 확인하세요.</p></div>
+      <section class="weather-card" aria-labelledby="location" aria-busy="false">
+        <div class="card-top"><h2 id="location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg> 제주특별자치도 <span>JEJU ISLAND</span></h2><span class="status-pill" id="badge">연결 대기</span></div>
+        <div class="weather-main"><div class="temperature"><p class="small-label">현재 기온</p><div class="degree"><span id="temperature">--</span><span class="unit">°C</span></div><p id="condition">제주의 하늘을 기다리는 중</p></div>
+          <div class="island-art" aria-hidden="true"><svg viewBox="0 0 320 230"><defs><linearGradient id="sea" x2="0" y2="1"><stop stop-color="#cce8e1"/><stop offset="1" stop-color="#e6f2ec"/></linearGradient></defs><circle cx="166" cy="105" r="92" fill="#f3f2df"/><g stroke="#e9ad52" stroke-width="2.5" stroke-linecap="round"><path d="M244 18v9m0 55v9m-36-36h9m55 0h9m-62-25 6 6m39 39 6 6m-51 0 6-6m39-39 6-6"/></g><circle cx="244" cy="55" r="20" fill="#efb34e"/><path d="M65 190c0-21 51-39 113-39s104 17 104 37-50 35-111 35S65 211 65 190Z" fill="url(#sea)"/><path d="m74 175 42-28 26-11 30-45 26 40 18 10 38 38c-55 23-118 21-180-4Z" fill="#799b7d"/><path d="m131 151 41-60 26 40 18 10 13 23c-37-18-61-30-98-13Z" fill="#537b64"/><path d="m160 108 12-17 13 20-13-4Z" fill="#e5e8ce"/><path d="M74 175c64 11 121 13 180 4l-14 14c-58 14-105 7-153-5Z" fill="#a8ba88"/><g fill="#587a65"><ellipse cx="114" cy="179" rx="7" ry="4"/><ellipse cx="218" cy="184" rx="6" ry="3"/></g><path d="M33 96c-10 0-15-6-15-13s6-13 13-13c4-14 25-18 33-4 16-3 24 20 9 27-4 3-28 3-40 3Z" fill="white"/><path d="M86 53c-6 0-10-4-10-9s5-9 10-9c3-12 20-14 25-3 14-2 19 16 8 20-5 2-23 1-33 1Z" fill="white"/><path d="M98 210h32m85-2h22m-83 11h29" stroke="#99c4b9" stroke-width="2" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="detail-row"><div><span class="metric-icon" aria-hidden="true">◒</span><div><p class="small-label">현재 습도</p><p class="metric"><span id="humidity">--</span><span>%</span></p></div></div><div><span class="clock-icon" aria-hidden="true">◷</span><div><p class="small-label">데이터 업데이트 <span class="timezone">· 한국 시간</span></p><p class="updated" id="updated">아직 업데이트되지 않았어요</p></div></div></div>
+        <div class="card-bottom"><p id="status" role="status" aria-live="polite">지금 제주의 날씨를 불러오고 있어요.</p><button id="refresh" type="button"><span id="refresh-icon" aria-hidden="true">↻</span> 새로고침</button></div>
+      </section>
+      <p class="footnote"><span aria-hidden="true">✳</span> 제주시 기준 현재 날씨를 전해드려요.</p>
+    </main>
+    <footer><span>작은 섬, 오늘의 날씨.</span><a href="https://www.weatherapi.com/" target="_blank" rel="noopener noreferrer">Weather data by WeatherAPI.com ↗</a></footer>
+  </div>
+</body>
+</html>
+
