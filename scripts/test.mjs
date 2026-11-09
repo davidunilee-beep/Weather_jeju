@@ -1,6 +1,9 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readFile, writeFile, mkdtemp, unlink, rmdir } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import handler from '../api/weather.js';
+import { loadWeatherKey } from './weather-key.mjs';
 
 const originalFetch = globalThis.fetch;
 const originalKey = process.env.WEATHER_API_KEY;
@@ -72,6 +75,26 @@ try {
     assert.equal(config.framework, null);
     assert.ok(config.functions['api/weather.js']);
   });
+  const keyDir = await mkdtemp(join(tmpdir(), 'jeju-key-test-'));
+  const keyFile = join(keyDir, 'test-key.txt');
+  try {
+    await writeFile(keyFile, 'a'.repeat(31));
+    assert.equal(await loadWeatherKey({ key: '', keyFile }), 'a'.repeat(31));
+    await writeFile(keyFile, 'b'.repeat(64));
+    const rotated = await loadWeatherKey({ key: '', keyFile });
+    check('replacement key is re-read without truncating a longer value', () => {
+      assert.equal(rotated, 'b'.repeat(64));
+    });
+    await writeFile(keyFile, 'a'.repeat(31) + '\n' + 'b'.repeat(64));
+    await assert.rejects(loadWeatherKey({ key: '', keyFile }), /한 개/);
+    const environmentKey = await loadWeatherKey({ key: '  environment-key  ', keyFile });
+    check('ambiguous key file is rejected and environment key takes precedence', () => {
+      assert.equal(environmentKey, 'environment-key');
+    });
+  } finally {
+    await unlink(keyFile);
+    await rmdir(keyDir);
+  }
   console.log(`${passed} checks passed.`);
 } finally {
   globalThis.fetch = originalFetch;
